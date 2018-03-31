@@ -13,14 +13,15 @@ window.onload = function () {//initialize game once the page starts up
     var wrong = 0;
     var select_question;
     var select_answer;
-    var selected;
+    var current_selection = 0;
+    var previous_selection = 0;
     var question;
     var answer;
     var begin = false;
 
     var intervalId;
     var clockRunning = false;
-    var time = 0;
+    var time = 21;
     var lap = 1;
 
     function start() {
@@ -37,23 +38,29 @@ window.onload = function () {//initialize game once the page starts up
     function reset() {
         time = 0;
         answer = "";
-        $("#display").text("00:00");
+        $("#display").text("00");
         $("#display_score").text(score);
         Questions();
     }
 
     function Questions() {
 
-        selected = Math.round(Math.random() * (Question.length-1));//select a random question from array //reset arrays
-        console.log(selected);
-        question = Question[selected];
+        console.log("previous selection :" + previous_selection);
+        do {
+            current_selection = Math.round(Math.random() * (Question.length - 1));//select a random question from array //reset arrays
+        } while (current_selection == previous_selection);
+        previous_selection = current_selection;
+
+        console.log("current selection :" + current_selection);
+        question = Question[current_selection];
         $(".question").text(question);//change text in question div
         console.log("Selected question :" + question);
-        select_answer = Answer_Shuffle[selected];
+        select_answer = Answer_Shuffle[current_selection];
         console.log("Array of answers :" + select_answer);
         answer = select_answer[0];
         console.log("Answer to question :" + answer);
         shuffleArray(select_answer);
+
 
     }
     function shuffleArray(array) {
@@ -72,7 +79,7 @@ window.onload = function () {//initialize game once the page starts up
         start();
     }
 
-    $("ul").on("click","#answers", function () {
+    $("ul").on("click", "#answers", function () {
         clearInterval(intervalId);
         clockRunning = false;
         console.log("You chose  : " + $(this).text());
@@ -81,7 +88,7 @@ window.onload = function () {//initialize game once the page starts up
             alert("You got it");
             score++;
             reset();
-        } else if($(this).text() != answer){
+        } else if ($(this).text() != answer) {
             alert("Wrong");
             reset();
         }
@@ -89,10 +96,14 @@ window.onload = function () {//initialize game once the page starts up
 
 
     function count() {
-        time++;
+        time--;
         var converted = timeConverter(time);
         // console.log(converted);
         $("#display").text(converted);
+        console.log(converted);
+        if ($("#display").text() == "00") {
+            reset();
+        }
     }
 
     function timeConverter(t) {
@@ -104,14 +115,7 @@ window.onload = function () {//initialize game once the page starts up
             seconds = "0" + seconds;
         }
 
-        if (minutes === 0) {
-            minutes = "00";
-        }
-        else if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-
-        return minutes + ":" + seconds;
+        return seconds;
     }
 
     function timeup() {
