@@ -36,7 +36,7 @@ window.onload = function () {//initialize game once the page starts up
     })
 
     function reset() {
-        time = 0;
+        time = 21;
         answer = "";
         $("#display").text("00");
         $("#display_score").text(score);
