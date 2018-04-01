@@ -98,9 +98,9 @@ window.onload = function () {//initialize game once the page starts up
     function count() {
         time--;
         var converted = timeConverter(time);
-        // console.log(converted);
+  
         $("#display").text(converted);
-        console.log(converted);
+        // console.log(converted);
         if ($("#display").text() == "00") {
             reset();
         }
