@@ -1,23 +1,37 @@
 
 window.onload = function () {//initialize game once the page starts up
     var Question = [
-        "Which bear is best?", "Bears, beets ,_____?", "Which cat did "
+        "Which bear is best?", "Bears, beets ,_____?", "Which cat did Dwight put down?","Who's the hottest in the office according to Michael Scott?",
+        "Which dream took Michael 11 years to make?", "'Michael Scott paper company' is the episode where Erin becomes the new receptionist, what is her real name?",
+        "Who doesn't get fired from Dunder Miflin?","What was Meredith studying while working in Dunder Mifflin?","Which of Michaels Ex-girlfriends is crazy?",
+        "Who did Michael get married to?", "Who started the fire?","How many seasons of The Office are there?"
     ]
     var Answer_Shuffle = [
         ["Black bear", "Brown bear", "Polar bear", "Panda bear"],
         ["Battlestar galactica", "Bears", "Stanley", "Recyclops"],
-        ["Fluffler", "Mr wiggle", "Nutterball", "Benedict"]
+        ["Sprinkles", "Mr wiggle", "Nutterball", "Ms Benedict"],
+        ["Danny Cadrano", "Jim Halpert","Ryan Howard","Kevin Malone"],
+        ["Threat level midnight","Somehow I managed","Here I go again...", "Have 100 kids, so they call be his friends"],
+        ["Kelly", "Jan","Pam","Erin"],
+        ["Stanley Hudson", "Kevin Malone","Andy Bernard","Toby Flenderson"],
+        ["Psycology","Nursing","Law","Coding"],
+        ["Jan Levinson","Carol Stills","Helene Beesly","Donna Newton"],
+        ["Holly Flax", "Carol Still","Helene Beesly","Jan Levinson"],
+        ["Ryan Howard","Erin","Dwight Schrute","Andy Bernard"],
+        ["9","8","1","10"]
+
     ]
     var Answer = Answer_Shuffle;
     var score = 0;
     var wrong = 0;
     var select_question;
-    var select_answer;
+    var select_answer=[];
     var current_selection = 0;
     var previous_selection = 0;
     var question;
     var answer;
     var begin = false;
+    var counter = 0;
 
     var intervalId;
     var clockRunning = false;
@@ -34,12 +48,19 @@ window.onload = function () {//initialize game once the page starts up
     $(".start").on("click", function () {
         Questions();
     })
+    $(".reset").on("click", function(){
+        reset();
+    })
 
     function reset() {
         time = 21;
         answer = "";
+        counter++;
         $("#display").text("00");
         $("#display_score").text(score);
+        if(counter == 12){
+            alert("You got :"+score+"/12 questions right!!");
+        }
         Questions();
     }
 
@@ -99,7 +120,7 @@ window.onload = function () {//initialize game once the page starts up
         time--;
         var converted = timeConverter(time);
   
-        $("#display").text(converted);
+        $("#display").text("Time left :" + converted);
         // console.log(converted);
         if ($("#display").text() == "00") {
             reset();

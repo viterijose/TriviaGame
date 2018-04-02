@@ -1,6 +1,44 @@
 html , body{
-    /* background: url(https://www.dailydot.com/wp-content/uploads/c72/2e/af89d5794935b7b01bc54471f495376c.jpg) no-repeat center center fixed; */
+    background: url(http://www.showbiz411.com/wp-content/uploads/2013/01/the-office.jpg) repeat fixed;
     height:100%;
     width:100%;
     margin:0;
+}
+.start{
+    margin:20px;
+    position: relative;
+    top: 0;
+    left:0;
+    width: 120px;
+    height: 60px;
+
+}
+.reset{
+    margin:20px;
+    position: relative;
+    top: 0;
+    left:0;
+    width: 120px;
+    height: 60px;
+    
+}
+h1{
+    font-family: 'Fascinate Inline', cursive;
+    text-align: center;
+}
+button{
+    font-family: 'Press Start 2P', cursive;
+}
+.question,#answers,#display, #display_score, .timer{
+    font-family: 'Concert One', cursive;
+    font-size: 20px;
+}
+#answers,.question{
+    margin:20px;
+}
+#display,#display_score{
+    margin:30px;
+}
+#answers:hover{
+    background-color: greenyellow;
 }
